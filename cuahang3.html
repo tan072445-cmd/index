@@ -1,202 +1,192 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Cửa Hàng Tự Nhiên</title>
-<style>
-  /* Nền tự nhiên */
-  body {
-    margin: 0; padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
-    background-size: cover;
-    color: #2f4f4f;
-  }
-  /* Khung chính */
-  .container {
-    max-width: 960px;
-    margin: 40px auto;
-    background-color: rgba(255,255,255,0.95);
-    border: 6px solid #8fbc8f;
-    border-radius: 15px;
-    padding: 30px 40px;
-    box-shadow: 0 0 20px #9acd32;
-  }
-  h1 {
-    text-align: center;
-    color: #2e8b57;
-    margin-bottom: 40px;
-  }
-  /* Trang chính */
-  #product-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
-    gap: 18px;
-  }
-  .product-item {
-    background: #f0fff0;
-    border: 3px solid #90ee90;
-    border-radius: 12px;
-    padding: 16px 12px;
-    text-align: center;
-    cursor: pointer;
-    transition: box-shadow 0.3s ease;
-  }
-  .product-item:hover {
-    box-shadow: 0 0 14px #7ecf7e;
-  }
-  .product-item a {
-    font-weight: 600;
-    color: #2e8b57;
-    text-decoration: none;
-  }
-  .product-item a:hover {
-    text-decoration: underline;
-  }
-  /* Trang chi tiết */
-  #product-detail {
-    display: none;
-  }
-  #product-detail h2 {
-    color: #2e8b57;
-    margin-bottom: 12px;
-  }
-  #product-detail p {
-    font-size: 16px;
-    margin-bottom: 15px;
-    line-height: 1.5;
-  }
-  #product-detail button {
-    background-color: #228b22;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 12px;
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  #product-detail button:hover {
-    background-color: #196619;
-  }
-  #back-btn {
-    margin-top: 18px;
-    background: #a9d5a9;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: 600;
-  }
-  #back-btn:hover {
-    background: #81b781;
-  }
-  /* Giỏ hàng */
-  #cart {
-    margin-top: 40px;
-    background: #e6ffe6;
-    border: 3px dashed #66cdaa;
-    border-radius: 14px;
-    padding: 20px 25px;
-  }
-  #cart h2 {
-    color: #2e8b57;
-    margin-top: 0;
-  }
-  #cart ul {
-    list-style: none;
-    padding-left: 0;
-    margin-bottom: 12px;
-  }
-  #cart li {
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
-  #cart li button {
-    margin-left: 8px;
-    font-weight: bold;
-    padding: 4px 10px;
-    border: none;
-    border-radius: 8px;
-    background-color: #2e8b57;
-    color: white;
-    cursor: pointer;
-  }
-  #cart li button:hover {
-    background-color: #1b4d33;
-  }
-  #checkout-btn {
-    background-color: #32cd32;
-    border: none;
-    padding: 14px 30px;
-    font-weight: 700;
-    border-radius: 14px;
-    color: white;
-    cursor: pointer;
-    font-size: 16px;
-    width: 100%;
-  }
-  #checkout-btn:hover {
-    background-color: #279927;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cửa Hàng Tự Nhiên Online</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: #2f4f4f;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      background-color: rgba(255,255,255,0.95);
+      border: 6px solid #8fbc8f;
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 0 20px #9acd32;
+    }
+    h1 {
+      text-align: center;
+      color: #2e8b57;
+    }
+    #product-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .product-item {
+      background: #f0fff0;
+      border: 3px solid #90ee90;
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+      transition: box-shadow 0.3s;
+    }
+    .product-item:hover {
+      box-shadow: 0 0 14px #7ecf7e;
+    }
+    .product-item img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    .product-item a {
+      font-weight: 600;
+      color: #2e8b57;
+      text-decoration: none;
+    }
+    #product-detail {
+      display: none;
+      margin-top: 30px;
+    }
+    #product-detail img {
+      width: 100%;
+      max-height: 250px;
+      object-fit: cover;
+      border-radius: 14px;
+      margin-bottom: 16px;
+    }
+    #product-detail h2 {
+      color: #2e8b57;
+      margin-bottom: 10px;
+    }
+    #product-detail p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+    #product-detail button {
+      padding: 10px 20px;
+      background-color: #2e8b57;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    #product-detail button:hover {
+      background-color: #1b5e3d;
+    }
+    #cart {
+      margin-top: 40px;
+      background: #e6ffe6;
+      border: 3px dashed #66cdaa;
+      border-radius: 14px;
+      padding: 20px;
+    }
+    #cart h2 {
+      margin-top: 0;
+      color: #2e8b57;
+    }
+    #cart ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    #cart li {
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    #cart li button {
+      margin-left: 8px;
+      padding: 4px 10px;
+      border: none;
+      border-radius: 8px;
+      background-color: #2e8b57;
+      color: white;
+      cursor: pointer;
+    }
+    #cart li button:hover {
+      background-color: #1b4d33;
+    }
+    #checkout-btn {
+      background-color: #32cd32;
+      border: none;
+      padding: 14px 30px;
+      font-weight: 700;
+      border-radius: 14px;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+      margin-top: 20px;
+    }
+    #checkout-btn:hover {
+      background-color: #279927;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <h1>Cửa Hàng Tự Nhiên</h1>
+    <h1>Cửa Hàng Tự Nhiên 🌿</h1>
 
-    <!-- Trang danh sách sản phẩm -->
+    <!-- Danh sách sản phẩm -->
     <div id="product-list"></div>
 
-    <!-- Trang chi tiết sản phẩm -->
+    <!-- Chi tiết sản phẩm -->
     <div id="product-detail">
+      <img id="detail-image" src="" alt="" />
       <h2 id="detail-name"></h2>
       <p id="detail-use"></p>
-      <p><strong>Giá: </strong><span id="detail-price"></span> đ</p>
+      <p><strong>Giá:</strong> <span id="detail-price"></span> đ</p>
       <button id="add-cart-btn">Thêm vào giỏ hàng</button>
-      <br />
-      <button id="back-btn">← Quay lại danh sách</button>
+      <button id="back-btn">← Quay lại</button>
     </div>
 
     <!-- Giỏ hàng -->
     <div id="cart">
       <h2>🛒 Giỏ hàng</h2>
       <ul id="cart-items"></ul>
-      <p><strong>Tổng tiền: </strong><span id="cart-total">0</span> đ</p>
+      <p><strong>Tổng tiền:</strong> <span id="cart-total">0</span> đ</p>
       <button id="checkout-btn">Thanh toán</button>
     </div>
   </div>
-
 <script>
-  // Dữ liệu sản phẩm
   const products = [
-    { id: 1, name: "Tinh dầu bưởi", price: 50000, use: "Giúp mọc tóc và thư giãn tinh thần." },
-    { id: 2, name: "Trà hoa cúc", price: 45000, use: "Giảm stress, giúp dễ ngủ và thanh lọc cơ thể." },
-    { id: 3, name: "Mật ong rừng", price: 100000, use: "Bổ dưỡng, kháng khuẩn, làm đẹp da." },
-    { id: 4, name: "Muối tắm thảo dược", price: 80000, use: "Thư giãn, làm sạch da và giảm mỏi cơ." },
-    { id: 5, name: "Sáp dưỡng môi thiên nhiên", price: 30000, use: "Dưỡng môi mềm mại, ngăn ngừa khô nứt." },
-    { id: 6, name: "Dầu dừa ép lạnh", price: 60000, use: "Dưỡng tóc, dưỡng ẩm da tự nhiên." },
-    { id: 7, name: "Tinh dầu sả chanh", price: 55000, use: "Xua muỗi, khử mùi, tạo cảm giác sảng khoái." },
-    { id: 8, name: "Xà phòng thảo mộc", price: 40000, use: "Làm sạch da nhẹ nhàng, không hóa chất." },
-    { id: 9, name: "Bột nghệ nguyên chất", price: 70000, use: "Chống viêm, làm đẹp da, giảm thâm nám." },
-    { id: 10, name: "Trà gừng mật ong", price: 65000, use: "Giảm ho, tăng sức đề kháng." },
-    { id: 11, name: "Mặt nạ đất sét thiên nhiên", price: 75000, use: "Làm sạch sâu lỗ chân lông, sáng da." },
-    { id: 12, name: "Sữa rửa mặt thiên nhiên", price: 90000, use: "Làm sạch da mặt nhẹ nhàng, không gây khô." },
-    { id: 13, name: "Son dưỡng thiên nhiên", price: 35000, use: "Dưỡng ẩm và làm hồng môi tự nhiên." },
-    { id: 14, name: "Dầu gội bồ kết", price: 85000, use: "Giúp tóc chắc khỏe, bóng mượt." },
-    { id: 15, name: "Tinh chất nha đam", price: 50000, use: "Làm dịu da, cấp ẩm và tái tạo." },
-    { id: 16, name: "Kem chống nắng tự nhiên", price: 120000, use: "Bảo vệ da khỏi tia UV mà không hóa chất." },
-    { id: 17, name: "Trà sen", price: 60000, use: "Thanh nhiệt, thư giãn tinh thần." },
-    { id: 18, name: "Tinh dầu oải hương", price: 75000, use: "Thư giãn, dễ ngủ, giảm căng thẳng." },
-    { id: 19, name: "Nước hoa hồng", price: 95000, use: "Làm mềm da, cân bằng độ ẩm." },
-    { id: 20, name: "Gel nha đam", price: 40000, use: "Làm mát da, chống kích ứng." }
+    { id: 1, name: "Tinh dầu bưởi", price: 50000, use: "Giúp mọc tóc và thư giãn tinh thần.", image: "https://vn.sociolla.com/cdn-cgi/image/w=325,format=auto,dpr=1.45/https://images.soco.id/4f386dec-66e9-4061-9cd1-82da202dd8a8-.jpg" },
+    { id: 2, name: "Trà hoa cúc", price: 45000, use: "Giảm stress, giúp dễ ngủ và thanh lọc cơ thể.", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE1VfEXhumrOvMpgqCK6fT8tC1wBpS6Hr84w&s" },
+    { id: 3, name: "Mật ong rừng", price: 100000, use: "Bổ dưỡng, kháng khuẩn, làm đẹp da.", image: "https://cdn.tgdd.vn//News/1452553//muihuong-845x500-1.jpg" },
+    { id: 4, name: "Muối tắm thảo dược", price: 80000, use: "Thư giãn, làm sạch da và giảm mỏi cơ.", image: "https://orgakids.vn/wp-content/uploads/2023/11/3-1.png" },
+    { id: 5, name: "Sáp dưỡng môi", price: 30000, use: "Dưỡng môi mềm mại, ngăn ngừa khô nứt.", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR61jDxykZ20tXOhl7uyKZrCsREtLuzgE5cVQ&s" },
+    { id: 6, name: "Dầu dừa ép lạnh", price: 60000, use: "Dưỡng tóc, dưỡng ẩm da tự nhiên.", image: "https://product.hstatic.net/200000865177/product/nics-ep-lanh-tinh-khiet-250ml-1653967111_img_800x800_eb97c5_fit_center_6e99243ef6e44aa8b0a05963f106d678_large.jpg" },
+    { id: 7, name: "Tinh dầu sả chanh", price: 55000, use: "Xua muỗi, khử mùi, tạo cảm giác sảng khoái.", image: "https://static.tinhdaukepha.vn/2020/07/21/tinh-dau-sa-chanh.jpg" },
+    { id: 8, name: "Xà phòng thảo mộc", price: 40000, use: "Làm sạch da nhẹ nhàng, không hóa chất.", image: "https://product.hstatic.net/200000116869/product/upload_78d09becc8eb41b792325ccdf2043c6a.jpg" },
+    { id: 9, name: "Bột nghệ", price: 70000, use: "Chống viêm, làm đẹp da, giảm thâm nám.", image: "https://matongtinphat.vn/wp-content/uploads/2024/11/tinh-bot-nghe-hu-100g.png" },
+    { id: 10, name: "Trà gừng mật ong", price: 65000, use: "Giảm ho, tăng sức đề kháng.", image: "data:image/jpeg;base64,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" },
+    { id: 11, name: "Mặt nạ đất sét", price: 75000, use: "Làm sạch sâu, sáng da tự nhiên.", image: "https://bizweb.dktcdn.net/100/345/186/files/xanh-la-dam-khung-khuyen-mai-dang-instagram-23-compressed.jpg?v=1735004895795" },
+    { id: 12, name: "Sữa rửa mặt tự nhiên", price: 90000, use: "Làm sạch nhẹ nhàng, không gây khô.", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKGonM6bFzdgS9w67n90MKvqTj5USeAd31kg&s" },
+    { id: 13, name: "Son dưỡng thiên nhiên", price: 35000, use: "Dưỡng và làm hồng môi.", image: "data:image/jpeg;base64,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" },
+    { id: 14, name: "Dầu gội bồ kết", price: 85000, use: "Giúp tóc chắc khỏe, bóng mượt.", image: "https://pazoda.com/wp-content/uploads/2021/06/Dau-goi-bo-ket-thorakao-400ml4-thorakao.jpg" },
+    { id: 15, name: "Tinh chất nha đam", price: 50000, use: "Làm dịu, cấp ẩm và tái tạo da.", image: "https://product.hstatic.net/200000634701/product/nha_dam_e173702d3c82458e807b0be78d6a20f9_master.jpg" },
+    { id: 16, name: "Kem chống nắng thiên nhiên", price: 120000, use: "Bảo vệ da khỏi tia UV, không hóa chất.", image: "https://img.lazcdn.com/g/p/54303c1bc2146f2740354a4bbfa26fff.png_720x720q80.png" },
+    { id: 17, name: "Trà sen", price: 60000, use: "Thanh nhiệt, thư giãn tinh thần.", image: "https://hoahoidacsanmientay.vn/wp-content/uploads/2022/09/LASEN-DOTHA-LOTUS-copy.jpg" },
+    { id: 18, name: "Tinh dầu oải hương", price: 75000, use: "Thư giãn, dễ ngủ, giảm căng thẳng.", image: "https://product.hstatic.net/1000199023/product/oai-huong-bulgaria_e03a449317414abfa1a8b5af47af562a_large.png" },
+    { id: 19, name: "Nước hoa hồng", price: 95000, use: "Làm mềm da, cân bằng độ ẩm.", image: "https://bizweb.dktcdn.net/100/444/220/products/248312406-204784851784829-8502680742695519765-n.jpg?v=1649657499633" },
+    { id: 20, name: "Gel nha đam", price: 40000, use: "Làm mát da, chống kích ứng.", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBX1UAe4A1GlYPYVzWSFeHZikDsQfxTp0WnA&s" }
   ];
 
-  // Biến trạng thái
   let currentProduct = null;
   let cart = [];
 
-  // Hiển thị danh sách sản phẩm
   const productListEl = document.getElementById('product-list');
   const productDetailEl = document.getElementById('product-detail');
   const cartItemsEl = document.getElementById('cart-items');
@@ -205,17 +195,19 @@
   function showProductList() {
     productDetailEl.style.display = 'none';
     productListEl.style.display = 'grid';
-
     productListEl.innerHTML = '';
     products.forEach(p => {
       const div = document.createElement('div');
       div.className = 'product-item';
-      div.innerHTML = `<a href="#" onclick="showProductDetail(${p.id});return false;" aria-label="Xem chi tiết ${p.name}">${p.name}</a>`;
+      div.innerHTML = `
+        <img src="${p.image}" alt="${p.name}" />
+        <a href="#" onclick="showProductDetail(${p.id});return false;">${p.name}</a>
+        <p><strong>${p.price.toLocaleString()} đ</strong></p>
+      `;
       productListEl.appendChild(div);
     });
   }
 
-  // Hiển thị trang chi tiết sản phẩm
   function showProductDetail(id) {
     const p = products.find(x => x.id === id);
     if (!p) return;
@@ -225,23 +217,18 @@
     productDetailEl.style.display = 'block';
 
     document.getElementById('detail-name').textContent = p.name;
-    document.getElementById('detail-use').textContent = `Công dụng: ${p.use}`;
+    document.getElementById('detail-use').textContent = "Công dụng: " + p.use;
     document.getElementById('detail-price').textContent = p.price.toLocaleString();
-
-    // Focus nút thêm vào giỏ hàng
-    document.getElementById('add-cart-btn').focus();
+    document.getElementById('detail-image').src = p.image;
   }
 
-  // Quay lại danh sách
   document.getElementById('back-btn').addEventListener('click', () => {
     currentProduct = null;
     showProductList();
   });
 
-  // Thêm vào giỏ hàng
   document.getElementById('add-cart-btn').addEventListener('click', () => {
     if (!currentProduct) return;
-
     const found = cart.find(item => item.id === currentProduct.id);
     if (found) {
       found.qty++;
@@ -249,10 +236,9 @@
       cart.push({ ...currentProduct, qty: 1 });
     }
     updateCart();
-    alert(`${currentProduct.name} đã được thêm vào giỏ hàng!`);
+    alert(currentProduct.name + " đã được thêm vào giỏ hàng!");
   });
 
-  // Cập nhật hiển thị giỏ hàng
   function updateCart() {
     cartItemsEl.innerHTML = '';
     let total = 0;
@@ -261,14 +247,13 @@
       const li = document.createElement('li');
       li.innerHTML = `
         ${item.name} x ${item.qty}
-        <button aria-label="Tăng số lượng ${item.name}" onclick="increaseQty(${item.id})">+</button>
+        <button onclick="increaseQty(${item.id})">+</button>
       `;
       cartItemsEl.appendChild(li);
     });
     cartTotalEl.textContent = total.toLocaleString();
   }
 
-  // Tăng số lượng trong giỏ
   function increaseQty(id) {
     const item = cart.find(x => x.id === id);
     if (item) {
@@ -277,28 +262,21 @@
     }
   }
 
-  // Thanh toán
   document.getElementById('checkout-btn').addEventListener('click', () => {
     if (cart.length === 0) {
-      alert('Giỏ hàng đang trống!');
+      alert("Giỏ hàng đang trống!");
       return;
     }
     let total = 0;
-    cart.forEach(item => {
-      total += item.price * item.qty;
-    });
+    cart.forEach(item => total += item.price * item.qty);
     alert(`Cảm ơn bạn đã thanh toán.\nTổng tiền: ${total.toLocaleString()} đ`);
     cart = [];
     updateCart();
   });
 
-  // Khởi tạo trang
+  window.increaseQty = increaseQty;
   showProductList();
   updateCart();
-
-  // Cho phép gọi tăng số lượng từ onclick trong giỏ hàng
-  window.increaseQty = increaseQty;
-
 </script>
 </body>
 </html>
