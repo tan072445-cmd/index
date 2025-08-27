@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cửa Hàng Tự Nhiên</title>
+<style>
+  /* Nền tự nhiên */
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+    background-size: cover;
+    color: #2f4f4f;
+  }
+  /* Khung chính */
+  .container {
+    max-width: 960px;
+    margin: 40px auto;
+    background-color: rgba(255,255,255,0.95);
+    border: 6px solid #8fbc8f;
+    border-radius: 15px;
+    padding: 30px 40px;
+    box-shadow: 0 0 20px #9acd32;
+  }
+  h1 {
+    text-align: center;
+    color: #2e8b57;
+    margin-bottom: 40px;
+  }
+  /* Trang chính */
+  #product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+    gap: 18px;
+  }
+  .product-item {
+    background: #f0fff0;
+    border: 3px solid #90ee90;
+    border-radius: 12px;
+    padding: 16px 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+  }
+  .product-item:hover {
+    box-shadow: 0 0 14px #7ecf7e;
+  }
+  .product-item a {
+    font-weight: 600;
+    color: #2e8b57;
+    text-decoration: none;
+  }
+  .product-item a:hover {
+    text-decoration: underline;
+  }
+  /* Trang chi tiết */
+  #product-detail {
+    display: none;
+  }
+  #product-detail h2 {
+    color: #2e8b57;
+    margin-bottom: 12px;
+  }
+  #product-detail p {
+    font-size: 16px;
+    margin-bottom: 15px;
+    line-height: 1.5;
+  }
+  #product-detail button {
+    background-color: #228b22;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  #product-detail button:hover {
+    background-color: #196619;
+  }
+  #back-btn {
+    margin-top: 18px;
+    background: #a9d5a9;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  #back-btn:hover {
+    background: #81b781;
+  }
+  /* Giỏ hàng */
+  #cart {
+    margin-top: 40px;
+    background: #e6ffe6;
+    border: 3px dashed #66cdaa;
+    border-radius: 14px;
+    padding: 20px 25px;
+  }
+  #cart h2 {
+    color: #2e8b57;
+    margin-top: 0;
+  }
+  #cart ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 12px;
+  }
+  #cart li {
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  #cart li button {
+    margin-left: 8px;
+    font-weight: bold;
+    padding: 4px 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #2e8b57;
+    color: white;
+    cursor: pointer;
+  }
+  #cart li button:hover {
+    background-color: #1b4d33;
+  }
+  #checkout-btn {
+    background-color: #32cd32;
+    border: none;
+    padding: 14px 30px;
+    font-weight: 700;
+    border-radius: 14px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+  }
+  #checkout-btn:hover {
+    background-color: #279927;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Cửa Hàng Tự Nhiên</h1>
+
+    <!-- Trang danh sách sản phẩm -->
+    <div id="product-list"></div>
+
+    <!-- Trang chi tiết sản phẩm -->
+    <div id="product-detail">
+      <h2 id="detail-name"></h2>
+      <p id="detail-use"></p>
+      <p><strong>Giá: </strong><span id="detail-price"></span> đ</p>
+      <button id="add-cart-btn">Thêm vào giỏ hàng</button>
+      <br />
+      <button id="back-btn">← Quay lại danh sách</button>
+    </div>
+
+    <!-- Giỏ hàng -->
+    <div id="cart">
+      <h2>🛒 Giỏ hàng</h2>
+      <ul id="cart-items"></ul>
+      <p><strong>Tổng tiền: </strong><span id="cart-total">0</span> đ</p>
+      <button id="checkout-btn">Thanh toán</button>
+    </div>
+  </div>
+
+<script>
+  // Dữ liệu sản phẩm
+  const products = [
+    { id: 1, name: "Tinh dầu bưởi", price: 50000, use: "Giúp mọc tóc và thư giãn tinh thần." },
+    { id: 2, name: "Trà hoa cúc", price: 45000, use: "Giảm stress, giúp dễ ngủ và thanh lọc cơ thể." },
+    { id: 3, name: "Mật ong rừng", price: 100000, use: "Bổ dưỡng, kháng khuẩn, làm đẹp da." },
+    { id: 4, name: "Muối tắm thảo dược", price: 80000, use: "Thư giãn, làm sạch da và giảm mỏi cơ." },
+    { id: 5, name: "Sáp dưỡng môi thiên nhiên", price: 30000, use: "Dưỡng môi mềm mại, ngăn ngừa khô nứt." },
+    { id: 6, name: "Dầu dừa ép lạnh", price: 60000, use: "Dưỡng tóc, dưỡng ẩm da tự nhiên." },
+    { id: 7, name: "Tinh dầu sả chanh", price: 55000, use: "Xua muỗi, khử mùi, tạo cảm giác sảng khoái." },
+    { id: 8, name: "Xà phòng thảo mộc", price: 40000, use: "Làm sạch da nhẹ nhàng, không hóa chất." },
+    { id: 9, name: "Bột nghệ nguyên chất", price: 70000, use: "Chống viêm, làm đẹp da, giảm thâm nám." },
+    { id: 10, name: "Trà gừng mật ong", price: 65000, use: "Giảm ho, tăng sức đề kháng." },
+    { id: 11, name: "Mặt nạ đất sét thiên nhiên", price: 75000, use: "Làm sạch sâu lỗ chân lông, sáng da." },
+    { id: 12, name: "Sữa rửa mặt thiên nhiên", price: 90000, use: "Làm sạch da mặt nhẹ nhàng, không gây khô." },
+    { id: 13, name: "Son dưỡng thiên nhiên", price: 35000, use: "Dưỡng ẩm và làm hồng môi tự nhiên." },
+    { id: 14, name: "Dầu gội bồ kết", price: 85000, use: "Giúp tóc chắc khỏe, bóng mượt." },
+    { id: 15, name: "Tinh chất nha đam", price: 50000, use: "Làm dịu da, cấp ẩm và tái tạo." },
+    { id: 16, name: "Kem chống nắng tự nhiên", price: 120000, use: "Bảo vệ da khỏi tia UV mà không hóa chất." },
+    { id: 17, name: "Trà sen", price: 60000, use: "Thanh nhiệt, thư giãn tinh thần." },
+    { id: 18, name: "Tinh dầu oải hương", price: 75000, use: "Thư giãn, dễ ngủ, giảm căng thẳng." },
+    { id: 19, name: "Nước hoa hồng", price: 95000, use: "Làm mềm da, cân bằng độ ẩm." },
+    { id: 20, name: "Gel nha đam", price: 40000, use: "Làm mát da, chống kích ứng." }
+  ];
+
+  // Biến trạng thái
+  let currentProduct = null;
+  let cart = [];
+
+  // Hiển thị danh sách sản phẩm
+  const productListEl = document.getElementById('product-list');
+  const productDetailEl = document.getElementById('product-detail');
+  const cartItemsEl = document.getElementById('cart-items');
+  const cartTotalEl = document.getElementById('cart-total');
+
+  function showProductList() {
+    productDetailEl.style.display = 'none';
+    productListEl.style.display = 'grid';
+
+    productListEl.innerHTML = '';
+    products.forEach(p => {
+      const div = document.createElement('div');
+      div.className = 'product-item';
+      div.innerHTML = `<a href="#" onclick="showProductDetail(${p.id});return false;" aria-label="Xem chi tiết ${p.name}">${p.name}</a>`;
+      productListEl.appendChild(div);
+    });
+  }
+
+  // Hiển thị trang chi tiết sản phẩm
+  function showProductDetail(id) {
+    const p = products.find(x => x.id === id);
+    if (!p) return;
+
+    currentProduct = p;
+    productListEl.style.display = 'none';
+    productDetailEl.style.display = 'block';
+
+    document.getElementById('detail-name').textContent = p.name;
+    document.getElementById('detail-use').textContent = `Công dụng: ${p.use}`;
+    document.getElementById('detail-price').textContent = p.price.toLocaleString();
+
+    // Focus nút thêm vào giỏ hàng
+    document.getElementById('add-cart-btn').focus();
+  }
+
+  // Quay lại danh sách
+  document.getElementById('back-btn').addEventListener('click', () => {
+    currentProduct = null;
+    showProductList();
+  });
+
+  // Thêm vào giỏ hàng
+  document.getElementById('add-cart-btn').addEventListener('click', () => {
+    if (!currentProduct) return;
+
+    const found = cart.find(item => item.id === currentProduct.id);
+    if (found) {
+      found.qty++;
+    } else {
+      cart.push({ ...currentProduct, qty: 1 });
+    }
+    updateCart();
+    alert(`${currentProduct.name} đã được thêm vào giỏ hàng!`);
+  });
+
+  // Cập nhật hiển thị giỏ hàng
+  function updateCart() {
+    cartItemsEl.innerHTML = '';
+    let total = 0;
+    cart.forEach(item => {
+      total += item.price * item.qty;
+      const li = document.createElement('li');
+      li.innerHTML = `
+        ${item.name} x ${item.qty}
+        <button aria-label="Tăng số lượng ${item.name}" onclick="increaseQty(${item.id})">+</button>
+      `;
+      cartItemsEl.appendChild(li);
+    });
+    cartTotalEl.textContent = total.toLocaleString();
+  }
+
+  // Tăng số lượng trong giỏ
+  function increaseQty(id) {
+    const item = cart.find(x => x.id === id);
+    if (item) {
+      item.qty++;
+      updateCart();
+    }
+  }
+
+  // Thanh toán
+  document.getElementById('checkout-btn').addEventListener('click', () => {
+    if (cart.length === 0) {
+      alert('Giỏ hàng đang trống!');
+      return;
+    }
+    let total = 0;
+    cart.forEach(item => {
+      total += item.price * item.qty;
+    });
+    alert(`Cảm ơn bạn đã thanh toán.\nTổng tiền: ${total.toLocaleString()} đ`);
+    cart = [];
+    updateCart();
+  });
+
+  // Khởi tạo trang
+  showProductList();
+  updateCart();
+
+  // Cho phép gọi tăng số lượng từ onclick trong giỏ hàng
+  window.increaseQty = increaseQty;
+
+</script>
+</body>
+</html>
